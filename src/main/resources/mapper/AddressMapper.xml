@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zakiis.springboot.test.mapper.AddressMapper">
+  <resultMap id="BaseResultMap" type="com.zakiis.springboot.test.model.Address">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="country" jdbcType="VARCHAR" property="country" />
+    <result column="province" jdbcType="VARCHAR" property="province" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="region" jdbcType="VARCHAR" property="region" />
+    <result column="street" jdbcType="VARCHAR" property="street" />
+    <result column="details" jdbcType="VARCHAR" property="details" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, country, province, city, region, street, details
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from address
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from address
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="truncate">
+    truncate table address
+  </delete>
+  
+  <insert id="insert" parameterType="com.zakiis.springboot.test.model.Address" useGeneratedKeys="true" keyProperty="id">
+    insert into address (id, country, province, 
+      city, region, street, 
+      details)
+    values (#{id,jdbcType=BIGINT}, #{country,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, 
+      #{city,jdbcType=VARCHAR}, #{region,jdbcType=VARCHAR}, #{street,jdbcType=VARCHAR}, 
+      #{details,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zakiis.springboot.test.model.Address">
+    insert into address
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="country != null">
+        country,
+      </if>
+      <if test="province != null">
+        province,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="region != null">
+        region,
+      </if>
+      <if test="street != null">
+        street,
+      </if>
+      <if test="details != null">
+        details,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="country != null">
+        #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="region != null">
+        #{region,jdbcType=VARCHAR},
+      </if>
+      <if test="street != null">
+        #{street,jdbcType=VARCHAR},
+      </if>
+      <if test="details != null">
+        #{details,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zakiis.springboot.test.model.Address">
+    update address
+    <set>
+      <if test="country != null">
+        country = #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="region != null">
+        region = #{region,jdbcType=VARCHAR},
+      </if>
+      <if test="street != null">
+        street = #{street,jdbcType=VARCHAR},
+      </if>
+      <if test="details != null">
+        details = #{details,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zakiis.springboot.test.model.Address">
+    update address
+    set country = #{country,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      region = #{region,jdbcType=VARCHAR},
+      street = #{street,jdbcType=VARCHAR},
+      details = #{details,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

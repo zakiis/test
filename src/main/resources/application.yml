@@ -1,0 +1,7 @@
+spring:  datasource:    driver-class-name: com.mysql.cj.jdbc.Driver    url: jdbc:mysql://root:123456@192.168.137.105:3306/zakiis    username: root    password: 123456
+
+mybatis:
+  cipher:
+    enabled: true
+    secret: 14fc710f878246a74ca7ca246173339b
+    iv: ba7ca246175339b14fc720f873246a7d  mapper-locations:  - classpath*:mapper/*.xml
