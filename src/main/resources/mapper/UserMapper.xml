@@ -9,12 +9,12 @@
     <result column="res_address_id" jdbcType="BIGINT" property="resAddressId" />
   </resultMap>
   
-  <resultMap id="UserBOResultMap" type="com.zakiis.springboot.test.bo.UserBO">
-  	<id column="id" jdbcType="BIGINT" property="id" />
-    <result column="username" jdbcType="VARCHAR" property="username" />
-    <result column="password" jdbcType="VARCHAR" property="password" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
+  <resultMap id="UserBOResultMap" type="com.zakiis.springboot.test.bo.UserBO" extends="BaseResultMap">
     <association property="residenceAddress" column="res_address_id" select="com.zakiis.springboot.test.mapper.AddressMapper.selectByPrimaryKey" />
+  </resultMap>
+  
+  <resultMap id="UserBOResultMap2" type="com.zakiis.springboot.test.bo.UserBO" extends="BaseResultMap">
+    <association property="residenceAddress" columnPrefix="addr_" resultMap="com.zakiis.springboot.test.mapper.AddressMapper.BaseResultMap"/>
   </resultMap>
   
   <sql id="Base_Column_List">
@@ -34,6 +34,32 @@
     where id = #{id,jdbcType=BIGINT}
   </select>
   
+  <select id="selectUserBOByExample" parameterType="com.zakiis.springboot.test.model.User" resultMap="UserBOResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    <where>
+      <if test="username != null">
+        and username = #{username,jdbcType=VARCHAR}
+      </if>
+      <if test="password != null">
+        and password = #{password,jdbcType=VARCHAR}
+      </if>
+      <if test="name != null">
+        and name = #{name,jdbcType=VARCHAR}
+      </if>
+      <if test="resAddressId != null">
+        and res_address_id = #{resAddressId,jdbcType=BIGINT}
+      </if>
+    </where>
+  </select>
+  
+  <select id="selectUserBOByNameAndCity" parameterType="com.zakiis.springboot.test.model.User" resultMap="UserBOResultMap2">
+    select a.id, a.username, a.password, a.name,
+	b.id addr_id, b.country addr_country, b.province addr_province, b.city addr_city, b.region addr_region, b.street addr_street, b.details addr_details from `user` a
+	inner join address b on a.res_address_id  = b.id 
+	where a.name = #{name,jdbcType=VARCHAR} and b.city = #{city,jdbcType=VARCHAR}
+  </select>
   
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from user

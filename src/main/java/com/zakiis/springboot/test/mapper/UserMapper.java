@@ -22,4 +22,8 @@ public interface UserMapper {
     int updateByPrimaryKey(User row);
     
     UserBO selectUserBOByPrimaryKey(Long id);
+    
+    UserBO selectUserBOByExample(User user);
+    
+    UserBO selectUserBOByNameAndCity(String name, String city); 
 }
