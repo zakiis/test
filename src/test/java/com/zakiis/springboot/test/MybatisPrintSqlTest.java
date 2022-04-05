@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.zakiis.algorithm.JsonUtil;
+import com.zakiis.common.JsonUtil;
 import com.zakiis.springboot.test.bo.UserBO;
 import com.zakiis.springboot.test.mapper.AddressMapper;
 import com.zakiis.springboot.test.mapper.UserMapper;
