@@ -1,4 +1,4 @@
-server:  port: 8080  servlet:    context-path: /log:  trace-id:    enabled: true    app-name: ${spring.application.name}    header: X-TRACE-IDspring:  datasource:    driver-class-name: com.mysql.cj.jdbc.Driver    url: jdbc:mysql://root:123456@192.168.137.105:3306/zakiis    username: root    password: 123456  application:    name: springboot-test
+server:  port: 8080  servlet:    context-path: /log:  trace-id:    enabled: true    app-name: ${spring.application.name}    header: X-TRACE-ID  desensitization:    replace-fields: userName,mobile    erase-fields: age,password    drop-fields: sexspring:  datasource:    driver-class-name: com.mysql.cj.jdbc.Driver    url: jdbc:mysql://root:123456@192.168.137.105:3306/zakiis    username: root    password: 123456  application:    name: springboot-test
 
 mybatis:
   cipher:
