@@ -3,27 +3,30 @@ package com.zakiis.springboot.test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
+
+import com.zakiis.common.TraceIdUtil;
+import com.zakiis.springboot.test.service.CallHealthApiService;
 
 @SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
 public class TraceIdFilterTest {
 	
-	@Value("${log.trace-id.header}")
-	private String traceIdHeaderName;
+	@Autowired
+	private RestTemplate restTemplate;
+	@Autowired
+	private CallHealthApiService callHealthApiService;
 
 	@Test
 	public void test() {
-		RestTemplate restTemplate = new RestTemplate();
-		HttpHeaders headers = new HttpHeaders();
-		headers.set(traceIdHeaderName, "Zakiis-" + System.currentTimeMillis());
-		ResponseEntity<String> result = restTemplate.exchange("http://localhost:8080/health", HttpMethod.GET, new HttpEntity<String>(headers), String.class);
+		TraceIdUtil.set("Zakiis-" + System.currentTimeMillis());
+		ResponseEntity<String> result = restTemplate.getForEntity("http://localhost:8080/health", String.class);
 		assertEquals(result.getBody(), "ok");
+		
+		String str = callHealthApiService.health();
+		assertEquals(str, "ok");
 	}
 }
