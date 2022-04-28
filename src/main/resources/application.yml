@@ -3,5 +3,5 @@ server:  port: 8080  servlet:    context-path: /log:  trace-id:    enable
 mybatis:
   cipher:
     enabled: true
-    secret: 14fc710f878246a74ca7ca246173339b
-    iv: ba7ca246175339b14fc720f873246a7d  mapper-locations:  - classpath*:mapper/*.xml  print-sql: true
+    secret: 510eb16642e410b3b85b07469db8e93a61231cba1c95835579b9e68d7f16d665
+    iv: ba7ca246175339b14fc720f873246a7d    enable-fuzzy-query: true  mapper-locations:  - classpath*:mapper/*.xml  print-sql: true

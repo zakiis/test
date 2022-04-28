@@ -1,5 +1,7 @@
 package com.zakiis.springboot.test.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.zakiis.springboot.test.model.Address;
@@ -19,4 +21,6 @@ public interface AddressMapper {
     int updateByPrimaryKeySelective(Address row);
 
     int updateByPrimaryKey(Address row);
+    
+    List<Address> selectByModel(Address addr);
 }

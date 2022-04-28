@@ -8,10 +8,11 @@
     <result column="city" jdbcType="VARCHAR" property="city" />
     <result column="region" jdbcType="VARCHAR" property="region" />
     <result column="street" jdbcType="VARCHAR" property="street" />
+    <result column="zip_code" jdbcType="VARCHAR" property="zipCode" />
     <result column="details" jdbcType="VARCHAR" property="details" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, country, province, city, region, street, details
+    id, country, province, city, region, street, zip_code, details
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -19,6 +20,21 @@
     from address
     where id = #{id,jdbcType=BIGINT}
   </select>
+  
+  <select id="selectByModel" parameterType="com.zakiis.springboot.test.model.Address" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from address
+    <where>
+    	<if test="details != null and details.length > 0">
+    	  and details like #{details}
+    	</if>
+    	<if test="zipCode != null and zipCode.length > 0">
+    	  and zip_code like #{zipCode}
+    	</if>
+    </where>
+  </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from address
     where id = #{id,jdbcType=BIGINT}
@@ -30,10 +46,10 @@
   <insert id="insert" parameterType="com.zakiis.springboot.test.model.Address" useGeneratedKeys="true" keyProperty="id">
     insert into address (id, country, province, 
       city, region, street, 
-      details)
+      zip_code, details)
     values (#{id,jdbcType=BIGINT}, #{country,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, 
       #{city,jdbcType=VARCHAR}, #{region,jdbcType=VARCHAR}, #{street,jdbcType=VARCHAR}, 
-      #{details,jdbcType=VARCHAR})
+      #{zipCode,jdbcType=VARCHAR}, #{details,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.zakiis.springboot.test.model.Address">
     insert into address

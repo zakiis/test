@@ -19,6 +19,8 @@ public class Address {
     private String region;
     @Cipher
     private String street;
+    @Cipher(length = 6)
+    private String zipCode;
     @Cipher
     private String details;
 
@@ -77,4 +79,12 @@ public class Address {
     public void setDetails(String details) {
         this.details = details;
     }
+
+	public String getZipCode() {
+		return zipCode;
+	}
+
+	public void setZipCode(String zipCode) {
+		this.zipCode = zipCode;
+	}
 }

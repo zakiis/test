@@ -16,6 +16,7 @@ create table address (
   city varchar(128),
   region varchar(128),
   street varchar(128),
+  zip_code varchar(128),
   details varchar(256)
 ) engine = 'InnoDB' default charset 'UTF8MB4' comment 'address';
 
