@@ -9,10 +9,10 @@
     <relativePath>../parent/pom.xml</relativePath>
   </parent>
   
-  <artifactId>zakiis-springboot-test</artifactId>
-  <name>zakiis-springboot-test</name>
+  <artifactId>zakiis-test</artifactId>
+  <name>zakiis-test</name>
   <url>https://zakiis.github.io</url>
-  <description>test project from zakiis-spring</description>
+  <description>test project from zakiis</description>
   
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -23,6 +23,10 @@
   	<dependency>
 	  <groupId>io.github.zakiis</groupId>
 	  <artifactId>zakiis-spring</artifactId>
+    </dependency>
+    <dependency>
+	  <groupId>io.github.zakiis</groupId>
+	  <artifactId>zakiis-job</artifactId>
     </dependency>
     
     <dependency>
