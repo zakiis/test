@@ -22,7 +22,7 @@
   
   	<dependency>
 	  <groupId>io.github.zakiis</groupId>
-	  <artifactId>zakiis-spring</artifactId>
+	  <artifactId>zakiis-starter</artifactId>
     </dependency>
     <dependency>
 	  <groupId>io.github.zakiis</groupId>

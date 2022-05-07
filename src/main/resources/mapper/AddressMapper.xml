@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.zakiis.springboot.test.mapper.AddressMapper">
-  <resultMap id="BaseResultMap" type="com.zakiis.springboot.test.model.Address">
+<mapper namespace="com.zakiis.spring.test.mapper.AddressMapper">
+  <resultMap id="BaseResultMap" type="com.zakiis.spring.test.model.Address">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="country" jdbcType="VARCHAR" property="country" />
     <result column="province" jdbcType="VARCHAR" property="province" />
@@ -21,7 +21,7 @@
     where id = #{id,jdbcType=BIGINT}
   </select>
   
-  <select id="selectByModel" parameterType="com.zakiis.springboot.test.model.Address" resultMap="BaseResultMap">
+  <select id="selectByModel" parameterType="com.zakiis.spring.test.model.Address" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from address
@@ -43,7 +43,7 @@
     truncate table address
   </delete>
   
-  <insert id="insert" parameterType="com.zakiis.springboot.test.model.Address" useGeneratedKeys="true" keyProperty="id">
+  <insert id="insert" parameterType="com.zakiis.spring.test.model.Address" useGeneratedKeys="true" keyProperty="id">
     insert into address (id, country, province, 
       city, region, street, 
       zip_code, details)
@@ -51,7 +51,7 @@
       #{city,jdbcType=VARCHAR}, #{region,jdbcType=VARCHAR}, #{street,jdbcType=VARCHAR}, 
       #{zipCode,jdbcType=VARCHAR}, #{details,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.zakiis.springboot.test.model.Address">
+  <insert id="insertSelective" parameterType="com.zakiis.spring.test.model.Address">
     insert into address
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -100,7 +100,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.zakiis.springboot.test.model.Address">
+  <update id="updateByPrimaryKeySelective" parameterType="com.zakiis.spring.test.model.Address">
     update address
     <set>
       <if test="country != null">
@@ -124,7 +124,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.zakiis.springboot.test.model.Address">
+  <update id="updateByPrimaryKey" parameterType="com.zakiis.spring.test.model.Address">
     update address
     set country = #{country,jdbcType=VARCHAR},
       province = #{province,jdbcType=VARCHAR},

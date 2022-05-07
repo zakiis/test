@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.zakiis.springboot.test.mapper.ArchiveMapper">
-  <resultMap id="BaseResultMap" type="com.zakiis.springboot.test.model.Archive">
+<mapper namespace="com.zakiis.spring.test.mapper.ArchiveMapper">
+  <resultMap id="BaseResultMap" type="com.zakiis.spring.test.model.Archive">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="field2" jdbcType="DECIMAL" property="field2" />
     <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
     <result column="add_time2" jdbcType="TIMESTAMP" property="addTime2" />
     <result column="add_time3" jdbcType="DATE" property="addTime3" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.zakiis.springboot.test.model.Archive">
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.zakiis.spring.test.model.Archive">
     <result column="field1" jdbcType="LONGVARCHAR" property="field1" />
   </resultMap>
   <sql id="Base_Column_List">
@@ -29,7 +29,7 @@
     delete from archive
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.zakiis.springboot.test.model.Archive">
+  <insert id="insert" parameterType="com.zakiis.spring.test.model.Archive">
     insert into archive (id, field2, add_time, 
       add_time2, add_time3, field1
       )
@@ -37,7 +37,7 @@
       #{addTime2,jdbcType=TIMESTAMP}, #{addTime3,jdbcType=DATE}, #{field1,jdbcType=LONGVARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.zakiis.springboot.test.model.Archive">
+  <insert id="insertSelective" parameterType="com.zakiis.spring.test.model.Archive">
     insert into archive
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -80,7 +80,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.zakiis.springboot.test.model.Archive">
+  <update id="updateByPrimaryKeySelective" parameterType="com.zakiis.spring.test.model.Archive">
     update archive
     <set>
       <if test="field2 != null">
@@ -101,7 +101,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zakiis.springboot.test.model.Archive">
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zakiis.spring.test.model.Archive">
     update archive
     set field2 = #{field2,jdbcType=DECIMAL},
       add_time = #{addTime,jdbcType=TIMESTAMP},
@@ -110,7 +110,7 @@
       field1 = #{field1,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.zakiis.springboot.test.model.Archive">
+  <update id="updateByPrimaryKey" parameterType="com.zakiis.spring.test.model.Archive">
     update archive
     set field2 = #{field2,jdbcType=DECIMAL},
       add_time = #{addTime,jdbcType=TIMESTAMP},

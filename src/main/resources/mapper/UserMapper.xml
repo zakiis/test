@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.zakiis.springboot.test.mapper.UserMapper">
-  <resultMap id="BaseResultMap" type="com.zakiis.springboot.test.model.User">
+<mapper namespace="com.zakiis.spring.test.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.zakiis.spring.test.model.User">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="username" jdbcType="VARCHAR" property="username" />
     <result column="password" jdbcType="VARCHAR" property="password" />
@@ -9,12 +9,12 @@
     <result column="res_address_id" jdbcType="BIGINT" property="resAddressId" />
   </resultMap>
   
-  <resultMap id="UserBOResultMap" type="com.zakiis.springboot.test.bo.UserBO" extends="BaseResultMap">
-    <association property="residenceAddress" column="res_address_id" select="com.zakiis.springboot.test.mapper.AddressMapper.selectByPrimaryKey" />
+  <resultMap id="UserBOResultMap" type="com.zakiis.spring.test.bo.UserBO" extends="BaseResultMap">
+    <association property="residenceAddress" column="res_address_id" select="com.zakiis.spring.test.mapper.AddressMapper.selectByPrimaryKey" />
   </resultMap>
   
-  <resultMap id="UserBOResultMap2" type="com.zakiis.springboot.test.bo.UserBO" extends="BaseResultMap">
-    <association property="residenceAddress" columnPrefix="addr_" resultMap="com.zakiis.springboot.test.mapper.AddressMapper.BaseResultMap"/>
+  <resultMap id="UserBOResultMap2" type="com.zakiis.spring.test.bo.UserBO" extends="BaseResultMap">
+    <association property="residenceAddress" columnPrefix="addr_" resultMap="com.zakiis.spring.test.mapper.AddressMapper.BaseResultMap"/>
   </resultMap>
   
   <sql id="Base_Column_List">
@@ -34,7 +34,7 @@
     where id = #{id,jdbcType=BIGINT}
   </select>
   
-  <select id="selectUserBOByExample" parameterType="com.zakiis.springboot.test.model.User" resultMap="UserBOResultMap">
+  <select id="selectUserBOByExample" parameterType="com.zakiis.spring.test.model.User" resultMap="UserBOResultMap">
     select 
     <include refid="Base_Column_List" />
     from user
@@ -54,7 +54,7 @@
     </where>
   </select>
   
-  <select id="selectUserBOByNameAndCity" parameterType="com.zakiis.springboot.test.model.User" resultMap="UserBOResultMap2">
+  <select id="selectUserBOByNameAndCity" parameterType="com.zakiis.spring.test.model.User" resultMap="UserBOResultMap2">
     select a.id, a.username, a.password, a.name,
 	b.id addr_id, b.country addr_country, b.province addr_province, b.city addr_city, b.region addr_region, b.street addr_street, b.details addr_details from `user` a
 	inner join address b on a.res_address_id  = b.id 
@@ -69,13 +69,13 @@
   	truncate table user
   </delete>
   
-  <insert id="insert" parameterType="com.zakiis.springboot.test.model.User" useGeneratedKeys="true" keyProperty="id">
+  <insert id="insert" parameterType="com.zakiis.spring.test.model.User" useGeneratedKeys="true" keyProperty="id">
     insert into user (id, username, password, 
       name, res_address_id)
     values (#{id,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{name,jdbcType=VARCHAR}, #{resAddressId,jdbcType=BIGINT})
   </insert>
-  <insert id="insertSelective" parameterType="com.zakiis.springboot.test.model.User">
+  <insert id="insertSelective" parameterType="com.zakiis.spring.test.model.User">
     insert into user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -112,7 +112,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.zakiis.springboot.test.model.User">
+  <update id="updateByPrimaryKeySelective" parameterType="com.zakiis.spring.test.model.User">
     update user
     <set>
       <if test="username != null">
@@ -130,7 +130,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.zakiis.springboot.test.model.User">
+  <update id="updateByPrimaryKey" parameterType="com.zakiis.spring.test.model.User">
     update user
     set username = #{username,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
